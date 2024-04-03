@@ -1,0 +1,52 @@
+{% extends "cars/header.html" %}
+{% block header %}
+<header id="autohold" class="">
+    <div class="header-float">
+        <div class="header-float-inner">
+            <h2 id="header-text">AUTO-HOLD</h2>
+        </div>
+    </div>
+    <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+        <div class="carousel-inner">
+            {% load static %}
+            <div id="slide-img2" class="carousel-item active" style="background-image: url({% static 'cars/images/header-bmw2_edited.jpg' %});">
+            </div>
+            {% load static %}
+            <div id="slide-img1" class="carousel-item" style="background-image: url({% static 'cars/images/header-mercedes2.jpg' %});">
+            </div>
+            {% load static %}
+            <div id="slide-img1" class="carousel-item" style="background-image: url({% static 'cars/images/header-audi3_edited.png' %});">
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block nav %}
+<div id="back-to-site-bar">
+    <form action="{% url 'index' %}">
+        <button type="submit"><p><span class="impresszum-kiemelt">Vissza a Kezdőlapra</span></p></button>
+    </form>
+</div>
+{% endblock %}
+{% block contents %}
+
+<div id="impresszum-container">
+    <h2>Impresszum</h2>
+    <ul id="impresszum-ul">
+        <li><span class="impresszum-kiemelt">Szolgáltató neve:</span> "SENSATION" Keresekedelmi Korlátolt Felelősségű Társaság</li>
+        <li><span class="impresszum-kiemelt">Székhely:</span> 1181 Budapest, Üllői út 415.</li>
+        <li><span class="impresszum-kiemelt">Elérhetőség:</span> e-mail: sensationkft@t-online.hu</li>
+        <li><span class="impresszum-kiemelt">Nyilvántartásba vevő hatóság:</span> 	Fővárosi Törvényszék Cégbírósága (1051 Budapest, Nádor u. 28.)</li>
+        <li><span class="impresszum-kiemelt">Cégjegyzékszám:</span> Cg.01-09-672418</li>
+        <li><span class="impresszum-kiemelt">Adószám:</span> 12379354-2-43</li>
+        <li><p><span class="impresszum-kiemelt">Tárhelyszolgáltató adatai:</span> </p>
+            <ul>
+                <li><span class="impresszum-kiemelt">Tárhely szolgáltató neve: Digital Ocean, Inc.</span> </li>
+                <li><span class="impresszum-kiemelt">Tárhely szolgáltató címe: Digital Ocean, Inc., 101 Avenue of the Americas, 10th Floor, New York, NY 10013</span> </li>
+                <li><span class="impresszum-kiemelt">Tárhely szolgáltató e-mail címe: contact@digitalocean.com</span> </li>
+                <li><span class="impresszum-kiemelt">Webszerver földrajzi címe: Frankfurt, Németország</span> </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+{% endblock %}

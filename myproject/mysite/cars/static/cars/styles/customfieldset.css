@@ -1,0 +1,8 @@
+.form-row {
+    width: 30%;
+    display: inline-block;
+}
+
+#id_ár {
+    width: 8rem;
+}

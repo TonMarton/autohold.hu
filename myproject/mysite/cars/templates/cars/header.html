@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block og-head %}
+    {% endblock %}
+    <title>AUTO-HOLD</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.jpg' %}"/>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:700" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cars/styles/bootstrap.min.css' %}">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cars/styles/swiper.min.css' %}">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cars/styles/index.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'cars/styles/swiper.min.css'%}">
+    {% block headstyle %}
+    {% endblock %}
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="0">
+    {% block header %}
+    {% endblock %}
+    {% block nav %}
+    {% endblock %}
+    {% block gallery %}
+    {% endblock %}
+    {% block contents %}
+    {% endblock %}
+    {% block bem-beh %}
+    {% endblock %}
+    <footer id="kapcsolat">
+        <h4>Kapcsolat</h4>
+        <div id="contact-row" class="row">
+            <div class="contact-col col-12 col-md-6">
+                <p class="footer-subtitle">Küldjön nekünk üzenetet a weboldalunkról...</p>
+                <form action="https://formspree.io/sensationkft@t-online.hu" method="post">
+                    <h5>Üzenet küldés</h5>
+                    <img class="icon" src="{% static 'cars/images/form-icon.png' %}">
+                    <div id="form-segment1">
+                        <div class="form-group">
+                            <label for="email-cím">E-mail cím</label>
+                            <input type="email" name="_replyto" class="form-control" id="email-cím" aria-describedby="emailHelp" placeholder="név@domain.hu">
+                            <small id="emailHelp" class="form-text text-muted">Adatait bizalmasan kezeljük és nem adjuk ki más személynek.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefon">Telefonszám</label>
+                            <input type="tel" name="Telefonszám" class="form-control" id="telefon" placeholder="+36...">
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input name="Telefonon kér választ" type="checkbox" class="form-check-input">
+                                Telefonon szeretnék választ kapni!
+                            </label>
+                        </div>
+                    </div>
+                    <div id="form-segment2">
+                        <div class="form-group">
+                            <label for="tárgy">Tárgy</label>
+                            <input type="text" name="_subject" class="form-control" id="tárgy" placeholder="Üzenet tárgya">
+                        </div>
+                        <div class="form-group">
+                            <label for="Üzenet">Üzenet</label>
+                            <textarea type="textarea" name="Üzenet: " class="form-control" id="üzenet" placeholder="Az üzenet..." style="height: 10rem;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Küldés</button>
+                    </div>
+                </form>
+            </div>
+            <div class="contact-col col-12 col-md-6">
+                <p class="footer-subtitle">Vegye fel a kapcsolatot Telefonon vagy E-mailen keresztül...</p>
+                <div>
+                    {% load static %}
+                    <img class="icon" src=" {% static 'cars/images/tel-icon.png' %}">
+                    <p class="contact-type-name">Tel: </p>
+                    <a class="contact-a" href="tel:+3620793399"><p>+3620793399</p></a>
+                </div>
+                <div>
+                    {% load static %}
+                    <img class="icon" src=" {% static 'cars/images/email-icon.png' %}">
+                    <p class="contact-type-name">E-Mail: </p>
+                    <a class="contact-a" href="mailto:sensationkft@t-online.hu"><p>sensationkft@t-online.hu</p></a>
+                </div>
+                <p>Személyes találkozáshoz, autó megtekintéshez, átvételhez, <br>kérjük, egyeztessen velünk időpontot!</p>
+                <div id="map"></div>
+                <script>
+                function initMap() {
+                    var uluru = {lat: 47.444470, lng: 19.175125};
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 10,
+                        center: uluru
+                    });
+                    var marker = new google.maps.Marker({
+                        position: uluru,
+                        map: map
+                    });
+                }
+                </script>
+                <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6lwzc4UdRUp2XWbVl_hD3uV9YM4mFg6g&callback=initMap">
+                </script>
+                <div class="card fb-card bottom text-center"onclick="window.open('https://www.facebook.com/sensationkft/')"style="cursor:pointer;">
+                    <div class="card-body light">
+                        <h4 class="card-title">Hogy semmiről se maradjon le!</h4>
+                        <p>Kövessen minket facebookon hírekért és a legújabb autóinkért!</p>
+                        {% load static %}
+                        <img src="{% static 'cars/images/fb-logo.png' %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="bottom-row row text-center">
+        <div class="bottom-col col-4">
+            <div class="blue-ribbon"></div>
+            <div class="red-ribbon"></div>
+            <p>Copyright 2017 © Sensation Kft.</p>
+        </div>
+        <div class="bottom-col col-4">
+            <div class="blue-ribbon"></div>
+            <div class="red-ribbon"></div>
+            <p><a href="{% url 'impresszum' %}">Impresszum</a></p>
+        </div>
+        <div class="bottom-col col-4">
+            <div class="blue-ribbon"></div>
+            <div class="red-ribbon"></div>
+            <p><a href="https://hu.linkedin.com/in/tonmarton" target="_blank">Weblap-design: Nagy Márton</a></p>
+        </div>
+    </div>
+
+    <!--Bootstrap ans own scripts-->
+    {% load static %}
+    <script type="text/javascript" src="{% static 'cars/scripts/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'cars/scripts/bootstrap.min.js' %}"></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'cars/scripts/scripts.js' %}" ></script>
+</body>
+</html>

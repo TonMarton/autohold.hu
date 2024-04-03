@@ -1,0 +1,211 @@
+{% extends "cars/header.html" %}
+
+{% block og-head %}
+{% load static %}
+<meta property="og:image" content="http://autohold.hu/static/cars/images/header-bmw2_edited.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://autohold.hu/" />
+<meta property="og:title" content="AUTO-HOLD" />
+<meta property="og:description" content="Tekintse meg a gondosan válogatott autóinkat, kínálatunk folyamatosan frissül!" />
+{% endblock %}
+
+{% block header %}
+<header id="autohold" class="">
+    <div class="header-float">
+        <div class="header-float-inner">
+            <h2 id="header-text">AUTO-HOLD</h2>
+        </div>
+    </div>
+    <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+        <div class="carousel-inner">
+            {% load static %}
+            <div id="slide-img2" class="carousel-item active" style="background-image: url({% static 'cars/images/header-bmw2_edited.jpg' %});">
+            </div>
+            {% load static %}
+            <div id="slide-img1" class="carousel-item" style="background-image: url({% static 'cars/images/header-mercedes2.jpg' %});">
+            </div>
+            {% load static %}
+            <div id="slide-img1" class="carousel-item" style="background-image: url({% static 'cars/images/header-audi3_edited.jpg' %});">
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block nav %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#">AUTO-HOLD</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="#autóink">Autóink <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#bem-container">Bemutatkozás</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#behozatal">Behozatal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#kapcsolat">Kapcsolat</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.facebook.com/sensationkft/" target="_blank">{% load static %}<img src="{% static 'cars/images/fb-logo.png' %}"></a>
+            </li>
+        </ul>
+        <form method="get"class="form-inline my-2 my-lg-0">
+            <input id="search-field" class="form-control mr-sm-2" type="text" placeholder="Autó" aria-label="Keresés" name="q" value="{{request.GET.q}}">
+            <button id="search-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Keresés</button>
+        </form>
+    </div>
+</nav>
+{% endblock %}
+{% block contents %}
+<div id="autóink">
+    <div id="autóink-title-container">
+        <div id="autóink-section-title">
+            <h4>Autóink</h4>
+            <div class="blue-ribbon"></div>
+            <div class="red-ribbon"></div>
+            {% if kiemelt_szöveg %}
+            <p>{{kiemelt_szöveg}}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row p-3 text-center m-2">
+        {% if specialCars %}
+        {% for car in specialCars %}
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3 col-card">
+            <div class="kiemelt-card card text-center" onclick="window.open('auto/{{car.id}}', '_self')" style="cursor:pointer;">
+                <div style="background-image:url({{car.image_locations}})" alt="Kép az autóról" class="card-img-top">
+                </div>
+                <div class="kiemelt-ribbon">
+                    <div class="blue-ribbon"></div>
+                    <div class="red-ribbon"></div>
+                    <p>Kiemelt ajánlat</p>
+                </div>
+                <div class="card-body-own card-body">
+                    <h3 class="card-title">{{car.név}}</h3>
+                    <ul>
+                        <li><span class="car-spec">Első forg.:</span> {{car.elsőforgalomba}}</li>
+                        <li><span class="car-spec">Motor:</span> {% if car.motorűrtartam %}{{car.motorűrtartam}} cm<sup>3</sup> {% else %} -{% endif %} </li>
+                        <li><span class="car-spec">Futtot kilométerek:</span> {% if car.futott %}{{car.futott}}{% else %} -{% endif %}</li>
+                        <li><span class="car-spec">Üzemanyagtípús:</span> {{car.üzemanyagtípus}}</li>
+                        <li><span class="car-spec">Ár:</span> {{car.hajtás}} Ft</li>
+                    </ul>
+                </div>
+                <form>
+                    <button type="button" onclick="window.location.href='auto/{{car.id}}'" class="btn.sharp btn-dark m-2" style="padding-left: 16px;padding-right:16px;"><span>További részletek</span></button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% for car in cars %}
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3 col-card">
+            <div class="card text-center" onclick="window.open('auto/{{car.id}}', '_self')"style="cursor:pointer;">
+                {% load static %}
+                <div style="background-image:url({{car.image_locations}})" alt="Kép az autóról" class="card-img-top">
+                </div>
+                <div class="card-body-own card-body">
+                    <h3 class="card-title">{{car.név}}</h3>
+                    <ul>
+                        <li><span class="car-spec">Első forg.:</span> {{car.elsőforgalomba}}</li>
+                        <li><span class="car-spec">Motor:</span> {% if car.motorűrtartam %}{{car.motorűrtartam}} cm<sup>3</sup> {% else %} -{% endif %} </li>
+                        <li><span class="car-spec">Futtot kilóméterek:</span> {% if car.futott %}{{car.futott}}{% else %} -{% endif %}</li>
+                        <li><span class="car-spec">Üzemayagtípús:</span> {{car.üzemanyagtípus}}</li>
+                        <li><span class="car-spec">Ár:</span> {{car.hajtás}} Ft</li>
+                    </ul>
+                </div>
+                <form>
+                    <button type="button" onclick="window.location.href='auto/{{car.id}}'" class="btn.sharp btn-dark m-2" style="padding-left: 16px;padding-right:16px;"><span>További részletek</span></button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3 col-card">
+            <div class="card last text-center" onclick="window.open('#behozatal', '_self')"style="cursor:pointer;">
+                <div class="card-body-own card-body light">
+                    <h4 class="card-title">Valami másra gondolt? Behozzuk Önnek!</h4>
+                    <p>Lépjen velünk kapcsolatba és segítünk!</p>
+                    <p class="lead"><strong>Kattintson a részletekért!</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3 col-card">
+            <div class="card fb-card text-center" onclick="window.open('https://www.facebook.com/sensationkft/')"style="cursor:pointer;">
+                <div class="card-body-own card-body light">
+                    <h4 class="card-title">Kövessen minket Facebookon!</h4>
+                    <p>Ne maradjon le egy ajánlatról sem!</p>
+                    {% load static %}
+                    <img src="{% static 'cars/images/fb-logo.png' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block bem-beh %}
+<div class="" id="bem-container">
+    <div id="bem-title">
+        <h4>Bemutatkozás</h4>
+    </div>
+    <p class="bem-text">
+        Már több mint 10 éve foglalkozunk autók adásával és vételével.
+        Minden megvásárolt autót részletesen megvizsgálunk, hogy
+        ne érje az ügyfeleinket meglepetés
+        Az autókat, amiket árulunk csak akkor hirdetjük meg, amikor az eladásra készen
+        parkol már a telephelyünkön.
+        Ennek köszönhetően, akár már az érdeklődés napján meg tudjuk kötni a szerződést, ha az ügyfél úgy kívánja.
+        Az átvétel napján elintézzük az okmányirodai ügyintézést és a biztosításkötést helyben.
+    </p>
+</div>
+<div id="behozatal">
+    <h4 id="behozatal-title">Behozatal</h4>
+    <div class="row p-4">
+        <div class="col-12 col-md-4 col-lg-4" style="margin-bottom: 1rem;">
+            <h6>Kitalálta milyen autót szeretne?</h6>
+            <p>
+                Ha kitalálta milyen autót szeretne, vegye fel velünk a <a href="">kapcsolatot</a> és segítünk Önnek! A szállítási határidő 10 nap.
+                Adja meg az Ön által konfigurált autó paramétereit, az extrákat, amiket szeretne és mi beszerezzük Önnek. <br>
+                Ha nincsen kialakult elképzelése vagy kérdése van, bármiben állunk rendelkezésére, <a href="">keressen minket bizalommal</a>!
+            </p>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4" style="margin-bottom: 1rem;">
+            <h6>Miben segítünk pontosan?</h6>
+            <p>
+                Az értékesített autóknak köszönhetően, valamint ügyfeleink ízlése alapján, rengeteg tapasztalatra tettünk szert, ezeket szeretnénk megosztani az Ön autója kiválasztásánál.
+                Nem csak azok jellemzőit ismerjük nagyon jól, hanem azt is, hogy mire kell ilyenkor odafigyelni, hogy a lehető legjobbat tudjuk Önnek kínálni.
+                A külföldi márkakereskedők ismernek minket és bíznak bennünk és mi is tudjuk hol érdemes vásárolni. <br>
+                És ami a legfontosabb, Önnek csak ki kell választania az autót, mi pedig átvizsgáljuk, megvesszük, leszállítjuk a telephelyünkre, hogy kulturált körülmények között átvehesse.
+                Az átadásig minden pénzügyi kockázat a miénk. Tekintse meg a {% load static %}<a href="{% static 'cars/images/BIANCO.pdf' %}">szállítási szerződésünket (BIANCO)</a>.
+            </p>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4">
+            <h6>Finanszírozás</h6>
+            <p>
+                Ha finanszírozási szolgáltatást szeretne igénybe venni, egyedi ajánlatot kérünk az Ön által megadott futam idő és önerő alapján, a választott banknál. Ez lehet nyílt végű és zárt végű (<a href="http://www.portfolio.hu/finanszirozas/kkv/lizing--nyilt-es-zart-vegu.4.45214.html" target="_blank">Melyiket válassza?</a>). <a href="http://www.autohitel.hu/lizing-zart-es-nyiltvegu/" target="_blank">Tájékoztató a leasing-ről</a>.
+            </p>
+            <p>
+                <span class="lead">Partnereink:</span>
+            </p>
+            <div class="">
+                <div class="card text-center" onclick="window.open('https://www.budapestbank.hu/csoport/auto/kereskedesbol-hitel.php')"style="cursor:pointer;">
+                    {% load static %}
+                    <img class="leasing-logo img-fluid" src="{% static 'cars/images/budapestbank-logo.jpg' %}" style="width: 14rem;">
+                </div>
+                <div class="card text-center" onclick="window.open('http://www.euroleasing.hu/news/gepjarmurol')"style="cursor:pointer;">
+                    {% load static %}
+                    <img class="leasing-logo img-fluid" src="{% static 'cars/images/mkb-logo.jpg' %}" style="width: 10rem;">
+                </div>
+                <div class="card text-center" onclick="window.open('https://www.merkantil.hu/hu/Vasarlas_kozvetl_eladotol')" style="cursor:pointer;">
+                    {% load static %}
+                    <img class="leasing-logo img-fluid" src="{% static 'cars/images/merkantill-logo.png' %}" style="width: 14rem;" >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

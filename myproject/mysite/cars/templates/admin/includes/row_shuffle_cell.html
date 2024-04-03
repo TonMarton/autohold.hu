@@ -1,0 +1,17 @@
+<!--
+My custom include, which should add an extra table cell with an up and down arrow button to the 'template-download' table in jfu-ui
+-->
+<td class="shuffle_cell">
+    <div class="button_wrapper">
+        <button type="button" class="up_button">
+            {% load static %}
+            <img src="{% static 'cars/images/up.svg' %}" alt="Fel">
+        </button>
+    </div>
+    <div class="button_wrapper">
+        <button type="button" class="down_button">
+            {% load static %}
+            <img src="{% static 'cars/images/down.svg' %}" alt="Le">
+        </button>
+    </div>
+</td>
